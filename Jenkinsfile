@@ -1,14 +1,28 @@
 pipeline {
     agent any
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building...'
+                git 'https://github.com/<your-username>/ci-cd-demo.git'
             }
         }
-        stage('Test') {
+
+        stage('Build') {
             steps {
-                echo 'Testing...'
+                echo 'No build tools used — skipping build step.'
+            }
+        }
+
+        stage('SonarQube Code Scan') {
+            steps {
+                sh '''
+                sonar-scanner \
+                  -Dsonar.projectKey=Code-Scan \
+                  -Dsonar.sources=. \
+                  -Dsonar.host.url=http://3.87.74.195:9001 \
+                  -Dsonar.token=sqp_0f0f77c6c4e1cd84d4d2b4352d1a6a0844ac6193
+                '''
             }
         }
     }
