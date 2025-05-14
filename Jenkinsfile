@@ -15,6 +15,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') { // Use the SonarQube environment configured in Jenkins
                     sh '''
+                        export PATH=$PATH:/opt/sonar-scanner/bin
                         sonar-scanner \
                         -Dsonar.projectKey=Code-Scan \
                         -Dsonar.sources=. \
