@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools {
-        // Use the SonarQube Scanner configured in Jenkins
-        sonarScanner 'SonarScanner'
-    }
     stages {
         stage('Checkout') {
             steps {
@@ -17,8 +13,14 @@ pipeline {
         }
         stage('SonarQube Code Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner -Dsonar.projectKey=Code-Scan -Dsonar.sources=.'
+                withSonarQubeEnv('SonarQube') { // Use the SonarQube environment configured in Jenkins
+                    sh '''
+                        sonar-scanner \
+                        -Dsonar.projectKey=Code-Scan \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://3.87.74.195:9001 \
+                        -Dsonar.login=sqp_0f0f77c6c4e1cd84d4d2b4352d1a6a0844ac6193
+                    '''
                 }
             }
         }
