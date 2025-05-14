@@ -18,7 +18,7 @@ pipeline {
                         sonar-scanner \
                         -Dsonar.projectKey=Code-Scan \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://54.221.0.204:9001/ 
+                        -Dsonar.host.url=http://54.221.0.204:9001 \
                         -Dsonar.login=sqp_0f0f77c6c4e1cd84d4d2b4352d1a6a0844ac6193
                     '''
                 }
